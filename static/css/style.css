@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+.worning{
+    background: rgb(92, 2, 2);
+    color: #eee;
+    padding: 10px 5px;
+}
