@@ -32,13 +32,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # my apps
     'accounts',
+    'management',
+
+    #  package
+    'pagination',
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'auth.urls'
@@ -119,16 +127,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), #prod
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # dev
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'), #prod
+# ]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # dev
+# STATIC_URL = '/static/'
+
+# MEDIA_URL = '/images/'
+# MEDIA_ROOT = os.path.join('STATIC')
+
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join('media')
+MEDIA_URL = '/images/'
+
+STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
 
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = '/accounts/dashboard/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
+MIDDLEWARE_CLASSES = (
+    'pagination.middleware.PaginationMiddleware',
+)

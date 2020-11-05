@@ -7,7 +7,6 @@ from django.core.exceptions import ValidationError
 
 from accounts.models import User
 
-
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -65,8 +64,9 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'date_of_birth', 'password1', 'password2'),
+            'fields': ('email', 'date_of_birth', 'password1', 'password2','groups'),
         }),
+        ('Permissions', {'fields': ('groups',)}),
     )
     search_fields = ('email',)
     ordering = ('email',)
@@ -74,4 +74,4 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.unregister(Group)
+# admin.site.register(Group)
