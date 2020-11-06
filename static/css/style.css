@@ -8,3 +8,11 @@
     color: #eee;
     padding: 10px 5px;
 }
+.add_new{
+    position: absolute;
+    right: 20px;
+}
+button:focus {
+    outline: 0px dotted!important;
+    outline: 0px auto -webkit-focus-ring-color!important;
+}

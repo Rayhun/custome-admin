@@ -1,6 +1,7 @@
 
 {% extends "accounts/base.html" %}
 {% load static %}
+{% load paginate %}
 
 {% block content %}
 <div class="wrapper">
@@ -12,7 +13,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Starter Page</h1>
+          <h1 class="m-0 text-dark">User</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -29,15 +30,11 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        
         <div class="col-12">
-
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">User List
-                    <span class="ml-5">
-                        <a href="" class="btn btn-sm btn-primary">Add New</a>
-                    </span>
+                <h3 class="card-title py-3">User List
+                  <a href="" class="btn btn-sm btn-primary add_new">Add New</a>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -65,7 +62,7 @@
                                 <a href=""><i class="fa fa-eye text-primary"></i></a>
                                 <a href=""><i class="fa fa-edit text-success"></i></a>
                                 <!-- delete confirm modal -->
-                                <button type="button" data-toggle="modal" data-target="#userModal-{{object.pk}}">
+                                <button style="border: 0px; button:focus{none}" type="button" data-toggle="modal" data-target="#userModal-{{object.pk}}">
                                     <i class="fa fa-trash text-danger"></i>
                                 </button>
                                 
@@ -86,7 +83,7 @@
                                         <div class="modal-footer">
                                             <form action="{# url 'users-delete' object.pk #}">
                                                 <input type="hidden" name="id" value="{{object.pk}}">
-                                                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
                                         </div>
@@ -96,42 +93,67 @@
                             </td>
                         </tr>
                         {% endfor %}
-                    {% else %}
-                    <tr>
-                        <td colspan="4" class="text-danger">No Data Found!</td>
-                    </tr>
-                    {% endif %}
-                  </tbody>
-
-                  <tfoot>
+                      {% else %}
                       <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Birthdat</th>
-                        <th>Actions</th>
+                          <td colspan="4" class="text-danger">No Data Found!</td>
                       </tr>
-                  </tfoot>
+                      {% endif %}
+                    
+                  </tbody>
                 </table>
+              
+          
+                <div class="row">
+                  <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="example1_info" role="status" 
+                    aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                  </div><div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                      <!-- pagination start -->
+                      <nav>
+                        {% if is_paginated %}
+                          <ul class="pagination float-right">
+
+                            {% if page_obj.has_previous %}
+                              <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                              <li class="page-item disabled">
+                                <span class="page-link">&laquo;</span>
+                              </li>
+                            {% endif %}
+
+                            {% for i in paginator.page_range %}
+                              {% if page_obj.number == i %}
+                                <li class="page-item active">
+                                  <span class="page-link">{{ i }}</span>
+                                </li>
+                              {% else %}
+                                <li class="page-item">
+                                  <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                </li>
+                              {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                              <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                              </li>
+                            {% else %}
+
+                              <li class="page-item disabled">
+                                <span class="page-link">&raquo;</span>
+                              </li>
+                            {% endif %}
+                          </ul>
+                      {% endif %}
+                  </nav>
+                  <!-- pagination end -->
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-              </div>
-              <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                  <ul class="pagination">
-                    <li class="paginate_button page-item previous disabled" id="example1_previous">
-                      <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                    </li>
-                    <li class="paginate_button page-item active">
-                      <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                    </li>
-                    <li class="paginate_button page-item ">
-                      <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                    </li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                    <li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+              
               </div>
               <!-- /.card-body -->
             </div>

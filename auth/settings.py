@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'accounts',
     'management',
 
-    #  package
-    'pagination',
+    #pack
+    'simple_pagination',
 
 ]
 
@@ -56,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
 ]
 
 ROOT_URLCONF = 'auth.urls'
@@ -150,7 +149,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = '/accounts/dashboard/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
-
-MIDDLEWARE_CLASSES = (
-    'pagination.middleware.PaginationMiddleware',
-)
