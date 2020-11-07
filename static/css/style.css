@@ -3,10 +3,8 @@
     padding: 0;
     outline: 0;
 }
-a{
-    color: #000!important;
-}
 .media-body a{
+    color: #000!important;
     padding-left: 15px;
 }
 .worning{
@@ -21,4 +19,20 @@ a{
 button:focus {
     outline: 0px dotted!important;
     outline: 0px auto -webkit-focus-ring-color!important;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }

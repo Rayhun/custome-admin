@@ -33,7 +33,7 @@ class UserCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
 
 class UserUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = User
-    fields = ['email','date_of_birth']
+    fields = ['name','email','date_of_birth']
     success_url = "/accounts/users/list/"
     template_name = "accounts/users/update.html"
 

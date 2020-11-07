@@ -55,11 +55,11 @@
                         {% for object in object_list %}
                         <tr role="row" class="odd">
                             <td tabindex="0" class="sorting_1">{{ object.id }}</td>
-                            <td>{{ object.first_name }}</td>
+                            <td>{{ object.name }}</td>
                             <td>{{ object.email }}</td>
                             <td>{{ object.date_of_birth|date:"d, M,Y" }}</td>
                             <td>
-                                <a href="#"><i class="fa fa-eye text-primary"></i></a>
+                                <a href="{% url 'accounts_users_profile' object.pk %}"><i class="fa fa-eye text-primary"></i></a>
                                 <a href="{% url 'accounts_users_update' object.pk %}"><i class="fa fa-edit text-success"></i></a>
                                 <!-- delete confirm modal -->
                                 <button style="border: 0px; button:focus{none}" type="button" data-toggle="modal" data-target="#userModal-{{object.pk}}">
