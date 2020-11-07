@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
@@ -59,3 +62,31 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100,null=True)
+    username = models.CharField(max_length=100,null=True)
+    mobile = models.CharField(max_length=100, null=True, blank=True)
+    father_name = models.CharField(max_length=100,null=True)
+    mother_name = models.CharField(max_length=100,null=True)
+    address1 = models.CharField(max_length=100,null=True)
+    address2 = models.CharField(max_length=100, null=True, blank=True)
+    post_code = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user.email)
+    
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+        ''' 
+            existing all user  
+        '''
+        # for user in User.objects.all():
+        #     Profile.objects.get_or_create(user=user)
+    instance.profile.save()

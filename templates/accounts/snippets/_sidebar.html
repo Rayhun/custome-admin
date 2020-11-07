@@ -15,21 +15,20 @@
 	
 		  <!-- Sidebar Menu -->
 		  <nav class="mt-2">
-			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+			<ul class="nav nav-pills nav-sidebar flex-column">
 			  <!-- Add icons to the links using the .nav-icon class
 				   with font-awesome or any other icon font library -->
 			  <li class="nav-item has-treeview menu-open">
-				{% url 'accounts_dashboard' as dashboard_url %}
-
-				<a href="#" class="nav-link {% if request.path == dashboard_url %}active{% endif %}">
-				  <i class="nav-icon fas fa-tachometer-alt"></i>
-				  <p>
-					Dashboard
-					<i class="right fas fa-angle-left"></i>
-				  </p>
-				</a>
 				<ul class="nav nav-treeview">
 				  
+					<li class="nav-item">
+						{% url 'accounts_dashboard' as dashboard_url %}
+					<a href="{% url 'accounts_dashboard' %}" 
+					class="nav-link {% if request.path == dashboard_url %}active{% endif %}">
+					<i class="nav-icon fas fa-tachometer-alt"></i>
+					  <p>Dashboard</p>
+					</a>
+				  </li>
 					<li class="nav-item">
 						{% url 'accounts_users_list' as user_list_url %}
 					<a href="{% url 'accounts_users_list' %}" 

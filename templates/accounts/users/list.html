@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="wrapper">
-
+  
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -34,7 +34,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title py-3">User List
-                  <a href="" class="btn btn-sm btn-primary add_new">Add New</a>
+                  <a href="{% url 'accounts_users_create' %}" class="btn btn-sm btn-primary add_new">Add New</a>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -55,12 +55,12 @@
                         {% for object in object_list %}
                         <tr role="row" class="odd">
                             <td tabindex="0" class="sorting_1">{{ object.id }}</td>
-                            <td>{{ object.name }}</td>
+                            <td>{{ object.first_name }}</td>
                             <td>{{ object.email }}</td>
                             <td>{{ object.date_of_birth|date:"d, M,Y" }}</td>
                             <td>
-                                <a href=""><i class="fa fa-eye text-primary"></i></a>
-                                <a href=""><i class="fa fa-edit text-success"></i></a>
+                                <a href="#"><i class="fa fa-eye text-primary"></i></a>
+                                <a href="{% url 'accounts_users_update' object.pk %}"><i class="fa fa-edit text-success"></i></a>
                                 <!-- delete confirm modal -->
                                 <button style="border: 0px; button:focus{none}" type="button" data-toggle="modal" data-target="#userModal-{{object.pk}}">
                                     <i class="fa fa-trash text-danger"></i>
@@ -81,8 +81,8 @@
                                         Are you sure want to delete this?
                                         </div>
                                         <div class="modal-footer">
-                                            <form action="{# url 'users-delete' object.pk #}">
-                                                <input type="hidden" name="id" value="{{object.pk}}">
+                                            <form action="{% url 'accounts_users_delete' object.pk %}" method="post">
+                                              {% csrf_token %}
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
@@ -178,14 +178,7 @@
 <!-- /.control-sidebar -->
 
 <!-- Main Footer -->
-<footer class="main-footer">
-  <!-- To the right -->
-  <div class="float-right d-none d-sm-inline">
-    Anything you want
-  </div>
-  <!-- Default to the left -->
-  <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-</footer>
+
 </div>
 {% endblock %} 
 
