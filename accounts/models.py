@@ -74,6 +74,7 @@ class Profile(models.Model):
     address1 = models.CharField(max_length=100,null=True)
     address2 = models.CharField(max_length=100, null=True, blank=True)
     post_code = models.CharField(max_length=100, null=True, blank=True)
+    profile_image = models.ImageField(null=True, blank=True,default="demo.jpg")
 
     def __str__(self):
         return str(self.user.email)

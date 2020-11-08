@@ -1,4 +1,3 @@
-from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, HttpResponseRedirect
@@ -8,18 +7,6 @@ from accounts.models import Profile
 from .forms import ProfileForm
 from django.contrib.auth import get_user_model
 User = get_user_model()
-# class ProfileView(LoginRequiredMixin,DetailView):
-
-#     model = Profile
-#     template_name = 'accounts/users/user_profile.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
-
-#     def test_func(self):
-#         return self.request.user.is_active and self.request.user.is_staff
-
 
 class ProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
     
@@ -66,7 +53,7 @@ class ProfileupdateView(LoginRequiredMixin, UserPassesTestMixin,UpdateView):
         self.profile_object = Profile.objects.filter(user=self.object).first()
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        profile_form = ProfileForm(self.request.POST, instance=self.profile_object)
+        profile_form = ProfileForm(self.request.POST,self.request.FILES, instance=self.profile_object)
         if (form.is_valid() and profile_form.is_valid()):
             return self.form_valid(form, profile_form)
         else:
