@@ -1,0 +1,84 @@
+
+{% extends "accounts/base.html" %}
+{% load static %}
+{% load paginate %}
+
+{% block content %}
+<div class="wrapper">
+  
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">User</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Users List</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title py-3">User Update
+                  <a href="{% url 'accounts_users_list' %}" class="btn btn-sm btn-primary add_new">Back</a>
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>{{ form }}</td>
+                            <td>{{ profile_form }}</td>
+                        </tr>
+                    </table>
+                    
+                    <button type="submit" class="btn-info btn-block text-center text-white py-2 mb-4 h4 text-justify">
+                        Update Profile</button>
+                </form>
+                    
+              </div>
+              
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+  <div class="p-3">
+    <h5>Title</h5>
+    <p>Sidebar content</p>
+  </div>
+</aside>
+<!-- /.control-sidebar -->
+
+<!-- Main Footer -->
+
+</div>
+{% endblock %} 
+

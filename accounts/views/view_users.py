@@ -4,7 +4,7 @@ from django.views.generic.edit import UpdateView, DeleteView,CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
-from accounts.models import User
+from accounts.models import User,Profile
 
 class UserListView(LoginRequiredMixin,UserPassesTestMixin, ListView):
     template_name = 'accounts/users/list.html'
@@ -23,7 +23,7 @@ class UserListView(LoginRequiredMixin,UserPassesTestMixin, ListView):
 
 class UserCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     model = User
-    fields = ['email','date_of_birth']
+    fields = ['name','email','date_of_birth']
     template_name = "accounts/users/create.html"
     success_url = reverse_lazy('accounts_users_list')
 

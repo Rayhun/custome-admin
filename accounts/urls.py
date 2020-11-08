@@ -4,6 +4,7 @@ from django.urls import path
 from accounts.views.dashboard.dashboard_view import DashboardView
 from accounts.views.view_users import UserListView, UserCreateView, UserUpdateView, UserDeleteView
 from accounts.views.view_user_profile import ProfileView
+from accounts.views.view_user_profile import ProfileupdateView
 
 
 urlpatterns = [
@@ -17,5 +18,6 @@ urlpatterns = [
     path('users/<int:pk>/update/',UserUpdateView.as_view(), name='accounts_users_update'),
     path('users/<int:pk>/delete/',UserDeleteView.as_view(), name='accounts_users_delete'),
 
-    path('users/<int:pk>/profile/',ProfileView.as_view(), name='accounts_users_profile')
+    path('users/profile/',ProfileView.as_view(), name='accounts_users_profile'),
+    path('users/<int:pk>/profile/update/',ProfileupdateView.as_view(), name='accounts_users_profile_update'),
 ]
