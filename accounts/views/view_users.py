@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
 from accounts.models import User,Profile
 
+from accounts.filters import UserFilter
+
 class UserListView(LoginRequiredMixin,UserPassesTestMixin, ListView):
     template_name = 'accounts/users/list.html'
     login_url = '/accounts/login/'
@@ -15,8 +17,14 @@ class UserListView(LoginRequiredMixin,UserPassesTestMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['UserFilter'] = UserFilter(self.request.GET)
         return context
 
+    def get_queryset(self):
+        qs = User.objects.all()
+        filtered_users = UserFilter(self.request.GET, queryset=qs)
+        return filtered_users.qs
+   
     def test_func(self):
         return self.request.user.is_active and self.request.user.is_staff
 

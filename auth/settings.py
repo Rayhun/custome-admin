@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     #pack
     'simple_pagination',
     'social_django',
+    'django_filters',
 
 ]
 

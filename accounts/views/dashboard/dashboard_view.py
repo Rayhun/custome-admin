@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from accounts.models import User
 
 class DashboardView(LoginRequiredMixin, TemplateView):
 
@@ -10,5 +11,5 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['latest_articles'] = Article.objects.all()[:5]
+        context['total_customer'] = User.objects.all().count()
         return context
