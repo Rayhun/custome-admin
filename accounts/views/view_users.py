@@ -12,7 +12,6 @@ class UserListView(LoginRequiredMixin,UserPassesTestMixin, ListView):
     template_name = 'accounts/users/list.html'
     login_url = '/accounts/login/'
     model = User
-    paginate_by = 5
 
 
     def get_context_data(self, **kwargs):
