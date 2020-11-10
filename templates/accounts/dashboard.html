@@ -31,14 +31,44 @@
       <div class="row">
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-info">
-            <div class="inner">
-              <h3>150</h3>
+          <a href="{% url 'accounts_users_list' %}">
+          <div class="small-box bg-warning">
+            <div class="inner p-2">
+              <h3>{{ total_regis }}</h3>
 
-              <p>New Orders</p>
+              <p>User Registrations</p>
             </div>
             <div class="icon">
-              <i class="fas fa-shopping-bag"></i>
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </a>
+        </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h3>{{ total_customer }}</h3>
+
+              <p>Total Customer</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>{{ total_admin }}</h3>
+
+              <p>Admin</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-user-shield"></i>
             </div>
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
@@ -58,37 +88,72 @@
             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3>{{ total_customer }}</h3>
-
-              <p>User Registrations</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-user-plus"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
+        <div class="col-lg-6">
+          <table class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">        
+            <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Birthdat</th>
+                  <th>Actions</th>
+              </tr>
+            </thead>
+  
+            <tbody>
+  
+                {% if total_regis %}
+                  {% for object in total_user %}
+                  <tr role="row" class="odd">
+                      <td tabindex="0" class="sorting_1">{{ object.id }}</td>
+                      <td>{{ object.name }}</td>
+                      <td>{{ object.email }}</td>
+                      <td>{{ object.date_of_birth|date:"d, M,Y" }}</td>
+                      <td>
+                          <a href="#"><i class="fa fa-eye text-primary"></i></a>
+                          <a href="{% url 'accounts_users_update' object.pk %}"><i class="fa fa-edit text-success"></i></a>
+                          <!-- delete confirm modal -->
+                          <button style="border: 0px; button:focus{none}" type="button" data-toggle="modal" data-target="#userModal-{{object.pk}}">
+                              <i class="fa fa-trash text-danger"></i>
+                          </button>
+                          
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="userModal-{{object.pk}}" tabindex="-1" aria-labelledby="usersModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                  <h5 class="modal-title" id="usersModalLabel">Delete Confirmation(#{{ object.email}})</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  </div>
+                                  <div class="modal-body">
+                                  Are you sure want to delete this?
+                                  </div>
+                                  <div class="modal-footer">
+                                      <form action="{% url 'accounts_users_delete' object.pk %}" method="post">
+                                        {% csrf_token %}
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-danger">Delete</button>
+                                      </form>
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+                  {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-danger">No Data Found!</td>
+                </tr>
+                {% endif %}
+              
+            </tbody>
+          </table>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3>65</h3>
 
-              <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-chart-pie"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
       </div>
       <!-- /.row -->
     </div><!-- /.container-fluid -->

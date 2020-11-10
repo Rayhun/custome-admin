@@ -1,7 +1,6 @@
 
 {% extends "accounts/base.html" %}
 {% load static %}
-{% load paginate %}
 
 {% block content %}
 <div class="wrapper">
@@ -41,8 +40,8 @@
               <div class="card-body">
                 <form action="" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" class="btn btn-sm bg-info">
+                    {{ form }}
+                    <input type="submit" class="btn btn-sm bg-info" value="Create">
                 </form>
               </div>
               

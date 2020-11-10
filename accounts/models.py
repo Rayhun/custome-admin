@@ -37,10 +37,10 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    date_of_birth = models.DateField(auto_now_add=False, null=True)
+    date_of_birth = models.DateField(auto_now_add=False, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False, null=True, blank=True)
 
     objects = UserManager()
 
@@ -55,7 +55,7 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
+        
     @property
     def is_staff(self):
         "Is the user a member of staff?"

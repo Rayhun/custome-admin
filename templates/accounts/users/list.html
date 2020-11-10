@@ -60,6 +60,7 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Email</th>
+                      <th>Admin or Not</th>
                       <th>Birthdat</th>
                       <th>Actions</th>
                   </tr>
@@ -72,6 +73,11 @@
                             <td tabindex="0" class="sorting_1">{{ object.id }}</td>
                             <td>{{ object.name }}</td>
                             <td>{{ object.email }}</td>
+                            <td>
+                              {% if object.is_admin == True %}
+                              {{ object.is_admin }}
+                              {% endif %}
+                            </td>
                             <td>{{ object.date_of_birth|date:"d, M,Y" }}</td>
                             <td>
                                 <a href="#"><i class="fa fa-eye text-primary"></i></a>
@@ -116,7 +122,6 @@
                     
                   </tbody>
                 </table>
-              
           
                 <div class="row">
                   <div class="col-sm-12 col-md-7">

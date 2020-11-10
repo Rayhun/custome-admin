@@ -4,7 +4,7 @@ from django.views.generic.edit import UpdateView, DeleteView,CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
-from accounts.models import User,Profile
+from accounts.models import User
 
 from accounts.filters import UserFilter
 
@@ -16,7 +16,6 @@ class UserListView(LoginRequiredMixin,UserPassesTestMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['UserFilter'] = UserFilter(self.request.GET)
         return context
 
     def get_queryset(self):
@@ -30,7 +29,7 @@ class UserListView(LoginRequiredMixin,UserPassesTestMixin, ListView):
 
 class UserCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     model = User
-    fields = ['name','email','date_of_birth']
+    fields = ['name','email','date_of_birth','is_admin']
     template_name = "accounts/users/create.html"
     success_url = reverse_lazy('accounts_users_list')
 

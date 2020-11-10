@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'simple_pagination',
     'social_django',
     'django_filters',
+    'crispy_forms',
 
 ]
 
@@ -141,3 +142,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = '/accounts/dashboard/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# Crispy
+CRISPY_TEMPLATE_PACK = 'uni_form'

@@ -1,7 +1,7 @@
 
 {% extends "accounts/base.html" %}
 {% load static %}
-{% load paginate %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="wrapper">
@@ -41,7 +41,7 @@
               <div class="card-body">
                 <form action="" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {{ form|crispy }}
                     <input type="submit" class="btn btn-sm bg-info" value="Update">
                 </form>
               </div>
